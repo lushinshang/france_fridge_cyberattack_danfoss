@@ -33,7 +33,7 @@ p{margin:0 0 1.15em}
 strong{font-weight:700}
 blockquote.note{margin:1.2em 0;padding:12px 16px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;color:var(--muted);font-size:.96rem}
 .table-wrap{overflow-x:auto;margin:1.4em 0;border:1px solid var(--line);border-radius:10px;background:var(--card)}
-table{border-collapse:collapse;width:100%;min-width:560px;font-size:.93rem;line-height:1.6}
+table{border-collapse:collapse;width:100%;font-size:.93rem;line-height:1.6}
 th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
 th{background:var(--code);font-weight:700;white-space:nowrap}
 tr:last-child td{border-bottom:0}
@@ -45,12 +45,21 @@ pre.mermaid[data-processed]{text-align:center;white-space:normal}
 .caption{color:var(--muted);font-size:.9rem;margin-top:-.4em}
 footer{max-width:720px;margin:0 auto;padding:0 20px 56px;color:var(--muted);font-size:.9rem}
 figure.summary-figure{margin:28px 0}
-figure.summary-figure img{width:100%;max-width:640px;display:block;margin:0 auto;border-radius:12px;aspect-ratio:16/9;object-fit:cover;box-shadow:0 6px 24px rgba(0,0,0,.08);cursor:zoom-in}
+figure.summary-figure img{width:100%;max-width:640px;display:block;margin:0 auto;border-radius:12px;height:auto;aspect-ratio:16/9;object-fit:contain;box-shadow:0 6px 24px rgba(0,0,0,.08);cursor:zoom-in}
 .lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(26,26,26,.88);align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
 .lightbox.is-open{display:flex}
 .lightbox img{max-width:96vw;max-height:92vh;width:auto;height:auto;border-radius:8px}
 .lightbox .hint{position:absolute;top:20px;right:24px;color:rgba(255,255,255,.8);font-size:14px}
-@media (max-width:640px){figure.summary-figure img{aspect-ratio:9/16;max-width:360px}}
+@media (max-width:640px){figure.summary-figure img{aspect-ratio:9/16;max-width:360px;height:auto}}
+@media (max-width:640px){
+.table-wrap{border:0;background:none;overflow:visible}
+table,tbody,tr,td{display:block;width:100%}
+thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+tr{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:12px;padding:8px 14px}
+td{border:0;padding:5px 0}
+td::before{content:attr(data-label);display:block;font-size:.78rem;font-weight:700;color:var(--muted)}
+nav.toc .in{-webkit-mask-image:linear-gradient(to right,#000 90%,transparent);mask-image:linear-gradient(to right,#000 90%,transparent)}
+}
 @media (max-width:640px){body{font-size:16px}h2{margin-left:0;padding-left:12px}header.hero{padding-top:36px}}
 </style>
 </head>
@@ -61,7 +70,7 @@ figure.summary-figure img{width:100%;max-width:640px;display:block;margin:0 auto
 <h1>六小時、50°C：法國超市冷鏈被遠端加熱，缺口在哪裡</h1>
 <p class="subtitle">Intermarché、Système U、Leclerc 冷藏設備遭網路攻擊事件導讀（資訊截至 2026-10-13）</p>
 </header>
-<nav class="toc" aria-label="章節導覽"><div class="in"><a href="#s1">先把數字釘住</a><a href="#s2">被拿來用的，是冰箱本來就</a><a href="#s3">三家對手共用一個設備商</a><a href="#s4">修補程式早就有了，為什麼</a><a href="#s5">還沒有答案的事</a><a href="#s6">如果你管的是冷鏈，這張清</a><a href="#s7">帶走的事</a><a href="#s8">來源</a></div></nav>
+<nav class="toc" aria-label="章節導覽"><div class="in"><a href="#s1">數字落差</a><a href="#s2">除霜機制</a><a href="#s3">共用設備商</a><a href="#s4">修補與暴露</a><a href="#s5">未解問題</a><a href="#s6">自查清單</a><a href="#s7">帶走的事</a><a href="#s8">來源</a></div></nav>
 <main id="main">
 <blockquote class="note">事件仍在發展，數字與說法以 2026 年 10 月 13 日前的報導為準。</blockquote>
 <figure class="summary-figure"><picture><source media="(max-width: 640px)" srcset="images/summary-mobile.png"><img src="images/summary-16x9.png" alt="一圖看懂：溫度從 -18°C 被調到 50°C，哪些已確認、哪些是單方說法、哪些尚無答案" width="1600" height="900"></picture></figure>
@@ -77,7 +86,7 @@ figure.summary-figure img{width:100%;max-width:640px;display:block;margin:0 auto
 <p class="caption"><em>虛線是目前沒有官方確認的環節。50°C 與約六小時的說法來自 Les Mousquetaires 與 Reuters 轉述。</em></p>
 <h2 id="s1">先把數字釘住：沒有人給得出同一個數字</h2>
 <p>受災規模是這起事件最混亂的部分。把各方說法並排看，會發現它們量的是不同的東西。</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">連鎖</th><th scope="col">說法</th><th scope="col">誰說的</th><th scope="col">性質</th></tr></thead><tbody><tr><td>Intermarché／Netto</td><td>至少 300 家</td><td>Intermarché 向 AFP</td><td>企業自述</td></tr><tr><td>Intermarché</td><td>約 150 家門市冷櫃被加熱到 50°C，持續約六小時</td><td>集團發言人（Reuters 轉述）</td><td>企業自述</td></tr><tr><td>Intermarché</td><td>約 100 家須丟棄庫存</td><td>Les Mousquetaires 初步統計（AA）</td><td>企業自述，較早期</td></tr><tr><td>Intermarché</td><td>200 至 300 家</td><td>France Inter 消息來源</td><td>匿名消息</td></tr><tr><td>Système U</td><td>不到 100 家</td><td>franceinfo</td><td>媒體報導</td></tr><tr><td>Carrefour</td><td>80 家（全法約 6,000 家）</td><td>Le Parisien／Reuters</td><td>企業說法</td></tr><tr><td>Monoprix</td><td>約 5%，約 30 家</td><td>franceinfo／AFP</td><td>媒體報導</td></tr><tr><td>E.Leclerc</td><td>「數家」，未給數字</td><td>向 AFP 確認供應商受影響</td><td>企業自述</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th scope="col">連鎖</th><th scope="col">說法</th><th scope="col">誰說的</th><th scope="col">性質</th></tr></thead><tbody><tr><td data-label="連鎖">Intermarché／Netto</td><td data-label="說法">至少 300 家</td><td data-label="誰說的">Intermarché 向 AFP</td><td data-label="性質">企業自述</td></tr><tr><td data-label="連鎖">Intermarché</td><td data-label="說法">約 150 家門市冷櫃被加熱到 50°C，持續約六小時</td><td data-label="誰說的">集團發言人（Reuters 轉述）</td><td data-label="性質">企業自述</td></tr><tr><td data-label="連鎖">Intermarché</td><td data-label="說法">約 100 家須丟棄庫存</td><td data-label="誰說的">Les Mousquetaires 初步統計（AA）</td><td data-label="性質">企業自述，較早期</td></tr><tr><td data-label="連鎖">Intermarché</td><td data-label="說法">200 至 300 家</td><td data-label="誰說的">France Inter 消息來源</td><td data-label="性質">匿名消息</td></tr><tr><td data-label="連鎖">Système U</td><td data-label="說法">不到 100 家</td><td data-label="誰說的">franceinfo</td><td data-label="性質">媒體報導</td></tr><tr><td data-label="連鎖">Carrefour</td><td data-label="說法">80 家（全法約 6,000 家）</td><td data-label="誰說的">Le Parisien／Reuters</td><td data-label="性質">企業說法</td></tr><tr><td data-label="連鎖">Monoprix</td><td data-label="說法">約 5%，約 30 家</td><td data-label="誰說的">franceinfo／AFP</td><td data-label="性質">媒體報導</td></tr><tr><td data-label="連鎖">E.Leclerc</td><td data-label="說法">「數家」，未給數字</td><td data-label="誰說的">向 AFP 確認供應商受影響</td><td data-label="性質">企業自述</td></tr></tbody></table></div>
 <p>數字從一百到三百不等，另有法媒估整體在 250 至 350 家之間（BleepingComputer 轉述）。有的算「冷櫃被加熱」，有的算「必須丟貨」，有的算「系統受影響」，清點的時間點也不同。讀這類報導，先問那個數字量的是哪一件事。</p>
 <p>損失同樣只有零散的估計。阿爾薩斯 Haguenau 的兩家門市（一家 Intermarché、一家 Leclerc）估計合計約 27 萬歐元（地方報導，Lycos 彙整）。吉倫特省一家 Intermarché 的店主向 Le Monde 估計，自己報廢的存貨進貨成本約 2.1 萬歐元，並說冷藏室達到 50°C、除霜程序被拉長到八小時。Intermarché 的 Thierry Cotillard 估計全國一天的損失可達數千萬歐元，France Inter 的消息來源則說「數百萬歐元」。這些都是個別估算，沒有業界或官方的合計。</p>
 <h2 id="s2">被拿來用的，是冰箱本來就有的功能</h2>
@@ -94,7 +103,7 @@ figure.summary-figure img{width:100%;max-width:640px;display:block;margin:0 auto
 <p>另一個旁證是曝險數字。Predicta Lab 執行長 Baptiste Robert 說，他找到 2,752 台暴露在網際網路上的 Danfoss 系統，其中 1,590 台在法國（BleepingComputer 轉述，單一研究者的說法）。這和 Claroty 引用的 2,765 台量級相近，但兩組數字的掃描方法和時間不同，不能直接比較。</p>
 <p>把這幾件事擺在一起，可以確定的有三點：廠商說受害的是停止更新的舊品，或沒有更新韌體的現行機型；CERT-FR 確認多起設備遭入侵；「管理介面連得到網際網路」這件事，至少從 2025 年起就被 CISA 公開警告過。</p>
 <h2 id="s5">還沒有答案的事</h2>
-<div class="table-wrap"><table><thead><tr><th scope="col">問題</th><th scope="col">目前狀況</th></tr></thead><tbody><tr><td>攻擊者怎麼進去的</td><td>CERT-FR 與檢察署都沒有公布。可能與 2025 年那批漏洞有關，也可能無關</td></tr><tr><td>是誰幹的</td><td>沒有團體宣稱，沒有任何政府歸因</td></tr><tr><td>動機</td><td>沒有勒索要求被報導；動機未知</td></tr><tr><td>火災</td><td>巴黎檢察署提到「火災」，無規模與地點；火災是否由攻擊造成尚待調查</td></tr><tr><td>是否擴及其他國家</td><td>Sekoia 分析師 Felix Aime 說西班牙、葡萄牙、波蘭、德國、比利時也受影響，屬單一分析師說法，無政府確認。法國政府只說正與歐洲夥伴協調</td></tr><tr><td>與 Ahold Delhaize 的關聯</td><td>同一天，荷蘭零售集團 Ahold Delhaize 宣布網路出現資安事件並讓部分系統離線；公司說沒有理由把兩件事連在一起。有勒索組織宣稱是自己幹的，屬團體自稱，未證實</td></tr><tr><td>與美國軍方商店的關聯</td><td>2026 年 8 月底，美國至少六間 commissary 的冷凍設備同時故障，Fort Huachuca 官方說「所有冷凍食品都壞了」。官方沒有說明原因，與本次事件是否有關完全未知</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th scope="col">問題</th><th scope="col">目前狀況</th></tr></thead><tbody><tr><td data-label="問題">攻擊者怎麼進去的</td><td data-label="目前狀況">CERT-FR 與檢察署都沒有公布。可能與 2025 年那批漏洞有關，也可能無關</td></tr><tr><td data-label="問題">是誰幹的</td><td data-label="目前狀況">沒有團體宣稱，沒有任何政府歸因</td></tr><tr><td data-label="問題">動機</td><td data-label="目前狀況">沒有勒索要求被報導；動機未知</td></tr><tr><td data-label="問題">火災</td><td data-label="目前狀況">巴黎檢察署提到「火災」，無規模與地點；火災是否由攻擊造成尚待調查</td></tr><tr><td data-label="問題">是否擴及其他國家</td><td data-label="目前狀況">Sekoia 分析師 Felix Aime 說西班牙、葡萄牙、波蘭、德國、比利時也受影響，屬單一分析師說法，無政府確認。法國政府只說正與歐洲夥伴協調</td></tr><tr><td data-label="問題">與 Ahold Delhaize 的關聯</td><td data-label="目前狀況">同一天，荷蘭零售集團 Ahold Delhaize 宣布網路出現資安事件並讓部分系統離線；公司說沒有理由把兩件事連在一起。有勒索組織宣稱是自己幹的，屬團體自稱，未證實</td></tr><tr><td data-label="問題">與美國軍方商店的關聯</td><td data-label="目前狀況">2026 年 8 月底，美國至少六間 commissary 的冷凍設備同時故障，Fort Huachuca 官方說「所有冷凍食品都壞了」。官方沒有說明原因，與本次事件是否有關完全未知</td></tr></tbody></table></div>
 <p>最後一列最值得注意。如果軍方商店的事件之後被證實是惡意操作，那麼「法國」就只是一系列事件中最大聲的一次；如果是巧合，我們也得到了一個提醒：現在還沒有人有辦法在事發當下分辨兩者。</p>
 <h2 id="s6">如果你管的是冷鏈，這張清單今天就能用</h2>
 <p>下面不是事件報導裡的結論，是本文根據攻防兩面的常見做法整理的建議，供自查。</p>
