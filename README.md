@@ -13,6 +13,7 @@
 | `index.html` | 導讀網頁（CSS 內嵌；Mermaid 由 CDN 載入，失效時顯示圖表原文） |
 | `france_fridge_cyberattack_danfoss.md` | 導讀 Markdown 原稿 |
 | `images/summary-16x9.png`、`images/summary-mobile.png` | 一圖看懂（桌面 16:9、手機 9:16） |
+| `images/risk-conditions-*.png`、`images/dos-contrast-*.png` | 風險段落配圖（各有桌面 16:9、手機 9:16） |
 
 ## 原始資料
 
