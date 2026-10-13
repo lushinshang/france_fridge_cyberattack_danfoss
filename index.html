@@ -113,6 +113,7 @@ nav.toc .in{-webkit-mask-image:linear-gradient(to right,#000 90%,transparent);ma
 <p>最後一列最值得注意。如果軍方商店的事件之後被證實是惡意操作，那麼「法國」就只是一系列事件中最大聲的一次；如果是巧合，我們也得到了一個提醒：現在還沒有人有辦法在事發當下分辨兩者。</p>
 <h2 id="s6">如果你管的是冷鏈，這張清單今天就能用</h2>
 <p>下面不是事件報導裡的結論，是本文根據攻防兩面的常見做法整理的建議，供自查。</p>
+<figure class="summary-figure"><picture><source media="(max-width: 640px)" srcset="images/checklist-mobile.png" width="941" height="1672"><img src="images/checklist-16x9.png" alt="冷鏈自查七件事：查自己露不露在外面、拿掉直接暴露、懷疑被入侵照 CERT-FR 順序、盤點不再更新的設備、偵測獨立於控制器之外、演練控制器被接管、合約寫明停更要通知（本文整理，非報導結論）" width="1672" height="941"></picture></figure>
 <p><strong><mark>先看自己露不露在外面。</mark></strong> 把自己對外公開的 IP 位址範圍丟進 Shodan、Censys 查一遍，看冷藏、空調、能源管理這類設備的管理頁面有沒有被索引到。Claroty 引用的 Censys 數字，就是這類公開掃描的結果。</p>
 <p><strong>拿掉直接暴露。</strong> CISA 在 2025 年對這個產品系列就建議：不要讓設備可以從網際網路連到，放在防火牆後與企業網路隔離，需要遠端維護時走 VPN 並保持更新。CERT-FR 這次的警報也要求斷開或過濾 AK-SM、AK-SC 的存取，必須遠端管理時暫時限制在可信任的 IP。設備商和維護廠商的遠端通道也要納入，確認誰能連、從哪裡連、有沒有雙因素。</p>
 <p><strong>懷疑已經被入侵，照 CERT-FR 的順序。</strong> 警報列出的步驟是：存取限制為僅授權的服務商、原廠重置、套用所有可用的安全修補、輪換所有密鑰與機密資訊、檢查現有帳號、全面重新設定設備。</p>
